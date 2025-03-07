@@ -1,9 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
-    <h1>This is about page</h1>
+  <q-page class="row items-center justify-evenly">
+    <h1>This is About page</h1>
   </q-page>
 </template>
 
-<script setup>
-//
-</script>
+<script setup></script>
