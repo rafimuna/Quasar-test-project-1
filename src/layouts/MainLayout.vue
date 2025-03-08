@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <!-- Header with Dark Gradient Background -->
-    <q-header elevated class="header-gradient">
+    <q-header class="header-gradient">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
@@ -15,10 +15,12 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-grey-2">
+    <q-drawer v-model="leftDrawerOpen" width="200" show-if-above bordered class="bg-grey-2">
       <q-list>
         <q-item-label header class="text-h6 text-weight-bold q-pb-md">
-          <q-avatar rounded color="primary" text-color="white" class="q-mr-lg">Rafi</q-avatar>
+          <div class="flex justify-center">
+            <q-avatar rounded color="primary" text-color="white" class="q-mr-lg">Rafi</q-avatar>
+          </div>
         </q-item-label>
 
         <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
@@ -33,6 +35,16 @@
             <q-item-label>GitHub</q-item-label>
             <q-item-label caption>Visit our repository</q-item-label>
             <q-tooltip>Open GitHub repository in a new tab</q-tooltip>
+          </q-item-section>
+        </q-item>
+
+        <q-separator spaced />
+        <q-item clickable v-ripple>
+          <q-item-section avatar>
+            <q-icon name="logout" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
