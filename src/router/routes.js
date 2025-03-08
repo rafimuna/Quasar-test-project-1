@@ -1,7 +1,10 @@
+import MainLayout from 'layouts/MainLayout.vue'
+import LoginLayout from 'layouts/LoginLayout.vue' // Import LoginLayout
+
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: MainLayout,
     children: [
       { path: '', name: 'Home', component: () => import('src/pages/HomePage.vue') },
       { path: '/AboutPage', name: 'About', component: () => import('src/pages/AboutPage.vue') },
@@ -19,14 +22,11 @@ const routes = [
     ],
   },
   {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue'),
+    path: '/login', // Add the login route
+    component: LoginLayout,
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
-    path: '/:catchAll(.*)*',
+    path: '/:catchAll(.*)*', // Keep only one catch-all route
     component: () => import('pages/ErrorNotFound.vue'),
   },
 ]

@@ -1,17 +1,12 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- Header with Dark Gradient Background -->
     <q-header class="header-gradient">
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
-
-        <q-toolbar-title class="text-white"> Rafi </q-toolbar-title>
-
-        <!-- Social Media Links Container -->
+        <q-toolbar-title class="text-white"> {{ userName }} </q-toolbar-title>
         <div class="q-gutter-xs">
-          <q-btn color="accent" label="Login" icon="login" v-for="n in 1" :key="`xs-${n}`" />
+          <q-btn color="accent" label="Login" icon="login" @click="navigateToLogin" />
         </div>
-        <!-- Social Media Links Container -->
       </q-toolbar>
     </q-header>
 
@@ -25,7 +20,6 @@
 
         <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
 
-        <!-- GitHub Link in Drawer -->
         <q-separator spaced />
         <q-item clickable v-ripple @click="openGithub">
           <q-item-section avatar>
@@ -57,36 +51,25 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineProps } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from 'vue-router'
 
 const linksList = [
-  {
-    title: 'Home',
-    icon: 'home',
-    link: '/AboutPage',
-  },
-
-  {
-    title: 'Skill',
-    icon: 'chat',
-    link: '/SkillPage',
-  },
-
-  {
-    title: 'Service',
-    icon: 'work',
-    link: '/ServicePage',
-  },
-
-  {
-    title: 'Contact',
-    icon: 'mail',
-    link: '/ContactPage',
-  },
+  { title: 'Home', icon: 'home', link: '/AboutPage' },
+  { title: 'Skill', icon: 'chat', link: '/SkillPage' },
+  { title: 'Service', icon: 'work', link: '/ServicePage' },
+  { title: 'Contact', icon: 'mail', link: '/ContactPage' },
 ]
 
 const leftDrawerOpen = ref(false)
+defineProps({
+  userName: {
+    type: String,
+    default: 'Guest',
+  },
+})
+const router = useRouter()
 
 function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
@@ -94,6 +77,10 @@ function toggleLeftDrawer() {
 
 function openGithub() {
   window.open('https://github.com/rafimuna/Quasar-test-project-1.git', '_blank')
+}
+
+function navigateToLogin() {
+  router.push('/login')
 }
 </script>
 
